@@ -1,0 +1,85 @@
+{% for block in section.blocks %}
+{%- capture section_classes -%}home-section home-section-height-{{ block.settings.section_height }} home-section-rte-{{ block.settings.background_color }}{%- endcapture -%}
+{% if block.settings.page != blank %}
+<section class="{{ section_classes | strip_newlines }}" data-home-section {{ block.shopify_attributes }}>
+    {%- assign selectedpage = page[block.settings.page] -%}
+    <div class="home-section-rte-wrapper" data-handle="{{ selectedpage.handle }}" data-home-section-content>
+        <h1 class="home-section-rte-title">{{ selectedpage.title | escape }}</h1>
+        <div class="rte">{{ selectedpage.content }}</div>
+    </div>
+</section>
+{% endif %}
+{% endfor %}
+
+{% schema %}
+{
+  "name": "Add Pages Section",
+  "class": "home-advance-content",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "section",
+      "name": "Section",
+      "settings": [
+        {
+          "type": "select",
+          "id": "section_height",
+          "label": "Section height",
+          "default": "medium",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "fullscreen",
+              "label": "Fullscreen"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "background_color",
+          "label": "Background color",
+          "default": "contrast",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "White",
+              "value": "white"
+            },
+            {
+              "label": "Contrast",
+              "value": "contrast"
+            }
+          ]
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "Select Page",
+          "info": "Select any page to show it's Content on Homepage"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Text",
+      "name": "Add Pages Section"
+    }
+  ]
+}
+
+{% endschema %}
