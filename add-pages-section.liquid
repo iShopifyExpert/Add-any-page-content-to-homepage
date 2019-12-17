@@ -2,7 +2,7 @@
 {%- capture section_classes -%}home-section home-section-height-{{ block.settings.section_height }} home-section-rte-{{ block.settings.background_color }}{%- endcapture -%}
 {% if block.settings.page != blank %}
 <section class="{{ section_classes | strip_newlines }}" data-home-section {{ block.shopify_attributes }}>
-    {%- assign selectedpage = page[block.settings.page] -%}
+    {%- assign selectedpage = pages[block.settings.page] -%}
     <div class="home-section-rte-wrapper" data-handle="{{ selectedpage.handle }}" data-home-section-content>
         <h1 class="home-section-rte-title">{{ selectedpage.title | escape }}</h1>
         <div class="rte">{{ selectedpage.content }}</div>
